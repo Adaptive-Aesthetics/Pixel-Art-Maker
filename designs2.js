@@ -1,56 +1,49 @@
 //Select color input
-const tableCellColor = document.querySelector('#colorPicker');
+const gridColorPicker = document.querySelector('#colorPicker');
 
-// Select size input
+// getting the elements and input values
 const myCanvas = document.getElementById('pixelCanvas')
-let tableRowsCount = document.querySelector('#inputHeight').value;
-const tableRowsCountEl = document.querySelector('#inputHeight');
-let tableColumnsCount = document.querySelector('#inputWidth').value; 
-const tableColumnsCountEl = document.querySelector('#inputWidth')
-const sizePicker = document.getElementById('sizePicker');
-console.log(myCanvas, tableRowsCount, tableColumnsCount, sizePicker)
+let heightInputValue = document.querySelector('#inputHeight').value;
+const heightInputElement = document.querySelector('#inputHeight');
+let widthInputValue = document.querySelector('#inputWidth').value;
+const widthInputElement = document.querySelector('#inputWidth')
+const form = document.getElementById('sizePicker');
+console.log(myCanvas, heightInputValue, widthInputValue, form)
 
-/**
- * @desc styling and behavior of grid squares once the grid is generated
- */
 
+
+//element is the tile that we'll be inserting into the grid
 let element = `<div style = 'border-left: 1px solid black;border-bottom: 1px solid black;' onclick = changeColor(event)></div>`
 
-window.onload = () => {
+window.onload = () => { //initializing grid with 1 tile
     myCanvas.style.gridTemplateColumns = 'repeat(1,20px)'
     myCanvas.style.gridTemplateRows = 'repeat(1,20px)'
     myCanvas.innerHTML += element
 }
 /**
- * @desc the color picker is linked to the grid of squares
- * @param {*} event you can change the color of the square when its clicked
+ * @desc changes color of tile clicked
+ * @param {*} event event object from element that triggered listener
  */
-function changeColor(event){
+function changeColor(event) {
     console.log('test')
     event.target.style.background = document.getElementById('colorPicker').value
 }
 
 /**
- * @desc creates a grid with squares
- * @param {*} event- starts grid when height and width input is submitted
+ * @desc creates the grid based on height and width input
+ * @param {*} event- event object from element that triggered listener
  */
 function makeGrid(event) {
     event.preventDefault()
+    myCanvas.innerHTML = '' //clearing canvas html to insert new rows/columns
 
-    console.log(document.getElementById('colorPicker').value)
+    row = event.target.children[0].value // event.target = form, children[0] = first input element
+    column = event.target.children[1].value // event.target = form, children[1] = second input element
 
-    myCanvas.innerHTML = ''
-    
-    console.log(event.target)
-    console.log(event.target.children[0].value, 'HEIGHT')
-
-
-    row  = event.target.children[0].value
-    column = event.target.children[1].value
-    
-    myCanvas.style.gridTemplateColumns = `repeat(${column},20px)`
-    myCanvas.style.gridTemplateRows = `repeat(${row},20px)`
-    for(let i = 0; i < column * row; i++){
+    //myCanvas element uses css grid to display grid
+    myCanvas.style.gridTemplateColumns = `repeat(${column},20px)` //repeating 20px columns based off input value
+    myCanvas.style.gridTemplateRows = `repeat(${row},20px)` //repeating 20px rows based off input value
+    for (let i = 0; i < column * row; i++) { //inserts column * row number of tiles
         myCanvas.innerHTML += element
     }
 
