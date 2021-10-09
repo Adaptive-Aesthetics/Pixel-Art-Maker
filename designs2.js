@@ -1,16 +1,18 @@
-// Select color input
-const color = document.querySelector('#colorPicker');
+//Select color input
+const tableCellColor = document.querySelector('#colorPicker');
+
 // Select size input
 const myCanvas = document.getElementById('pixelCanvas')
-let row = document.querySelector('#inputHeight').value;
-const rowEl = document.querySelector('#inputHeight');
-let column = document.querySelector('#inputWidth').value; 
-const columnEl = document.querySelector('#inputWidth')
-const size = document.getElementById('sizePicker');
-// size.addEventListener('click', )
-console.log(myCanvas, row, column, size)
-// When size is submitted by the user, call makeGrid()
+let tableRowsCount = document.querySelector('#inputHeight').value;
+const tableRowsCountEl = document.querySelector('#inputHeight');
+let tableColumnsCount = document.querySelector('#inputWidth').value; 
+const tableColumnsCountEl = document.querySelector('#inputWidth')
+const sizePicker = document.getElementById('sizePicker');
+console.log(myCanvas, tableRowsCount, tableColumnsCount, sizePicker)
 
+/**
+ * @desc styling and behavior of grid squares once the grid is generated
+ */
 
 let element = `<div style = 'border-left: 1px solid black;border-bottom: 1px solid black;' onclick = changeColor(event)></div>`
 
@@ -19,18 +21,19 @@ window.onload = () => {
     myCanvas.style.gridTemplateRows = 'repeat(1,20px)'
     myCanvas.innerHTML += element
 }
-
+/**
+ * @desc the color picker is linked to the grid of squares
+ * @param {*} event you can change the color of the square when its clicked
+ */
 function changeColor(event){
     console.log('test')
     event.target.style.background = document.getElementById('colorPicker').value
 }
 
-
-
-
-    
-
-
+/**
+ * @desc creates a grid with squares
+ * @param {*} event- starts grid when height and width input is submitted
+ */
 function makeGrid(event) {
     event.preventDefault()
 
@@ -51,19 +54,6 @@ function makeGrid(event) {
         myCanvas.innerHTML += element
     }
 
-// Your code goes here!
 
 }
 
-// columnEl.addEventListener('change', (event) =>{
-    
-// })
-
-// rowEl.addEventListener('change', (event) =>{
-//     row = event.target.value
-//     console.log('hello')
-    
-//     for(let i = 0; i < column * row; i++){
-//         myCanvas.innerHTML += element
-//     }
-// })
